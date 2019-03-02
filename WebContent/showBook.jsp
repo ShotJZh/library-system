@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
 
@@ -72,14 +73,36 @@
 						<!-- Content -->
 						<div id="content" class="grid_8">
 							<div class="detail">
-								<img class="book-img" src="">
+								<img class="book-img" src="<s:property value="book.getB_pic()"/>">
 								<div class="info" style="width:400px;">
-									<ul>
-										<li>书名	&nbsp;&nbsp; <small>作者</small></li>
-										<li>出版社: <span style="float:right;margin-right:50px;">页数:</span></li>
-										<li>ISBN: <span style="float:right;margin-right:50px;">索取号:</span></li>
-										<li>馆藏地点:	<span style="float:right;margin-right:50px;">馆藏量:</span></li>
-									</ul>
+									
+									<table>
+										<tr>
+											<td>书名	：</td>
+											<td><s:property value="book.getB_name()"/></td>
+											<td>作者：</td>
+											<td><s:property value="book.getB_author()"/></td>
+										</tr>
+										<tr>
+											<td>出版社:</td>
+											<td><s:property value="book.getB_press()"/></td>
+											<td>页数:</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>ISBN:</td>
+											<td></td>
+											<td>索取号:</td>
+											<td><s:property value="book.getB_id()"/></td>
+										</tr>
+										<tr>
+											<td>馆藏地点:</td>
+											<td><s:property value="book.getB_location()"/></td>
+											<td>馆藏量:</td>
+											<td><s:property value="book.getB_in()+book.getB_out()"/></td>
+										</tr>
+									</table>										
+
 								</div>																
 							</div>
 							<h2>馆藏信息</h2>
@@ -92,125 +115,80 @@
 										<th width="40%">馆藏地点</th>
 									</thead>
 									<tr>
-										<td>索书号</td>
-										<td>馆藏状态</td>
-										<td>流通状态</td>
-										<td>馆藏地点</td>
+										<td><s:property value="b_id"/></td>
+										<td><s:property value="book.getB_in()"/></td>
+										<td><s:property value="book.getB_out()"/></td>
+										<td><s:property value="book.getB_location()"/></td>
 									</tr>
 								</table>
 							</div>
 							<h2>内容简介</h2>
 							<div class="book-detail">
-								#####
+								<s:property value="book.getB_description()"/>
 							</div>
 							<h2>作者简介</h2>
 							<div class="book-detail">
-								#####
+								<s:property value="author.getA_name()"/><br>
+								<s:property value="author.getA_profile()"/>
 							</div>
-							<h2>作者的其他书籍</h2>
+							<h2>作者的馆藏书籍</h2>
 							<div class="showBook">
+							<s:iterator value="bookList" >
 								<div class="book" style="overflow:hidden;">
-									<img src="" class="book-img"/>
+									<img src="<s:property value="b_pic"/>" class="book-img"/>
 									<div class="book-content">
-										<h3 style="font-size:18px;">书名</h3>
-										<p>作者  著/出版社</p>
-										<p>馆藏量</p>	
+										<h3 style="font-size:18px;"><s:property value="b_name"/></h3>
+										<p>作者  <s:property value="b_author"/>著</p>
+										<p>出版社:<s:property value="b_press"/></p>
+										<p>馆藏量:<s:property value="b_in"/></p>	
 										<p>内容简介</p>								
 										<div class="book-info" style="width:400px;"></div>														
 									</div>
 								</div>
-								<div class="book" style="overflow:hidden;">
-									<img src="" class="book-img"/>
-									<div class="book-content">
-										<h3 style="font-size:18px;">书名</h3>
-										<p>作者  著/出版社</p>
-										<p>馆藏量</p>	
-										<p>内容简介</p>								
-										<div class="book-info" style="width:400px;"></div>												
-									</div>
-								</div>
-							</div>
-							<h2>猜你喜欢</h2>
-							<div class="showBook">
-								<div class="bookList">
-									<a href="#">
-									<img src="" class="book-img">
-									</a>
-									<h3>书名 </h3>
-									<h3>作者</h3>
-								</div>
-								<div class="bookList">
-									<a href="#">
-									<img src="" class="book-img">
-									</a>
-									<h3>书名 </h3>
-									<h3>作者</h3>
-								</div>
-								<div class="bookList">
-									<a href="#">
-									<img src="" class="book-img">
-									</a>
-									<h3>书名 </h3>
-									<h3>作者</h3>
-								</div>
-								<div class="bookList">
-									<a href="#">
-									<img src="" class="book-img">
-									</a>
-									<h3>书名 </h3>
-									<h3>作者</h3>
-								</div>
-							</div>
+							</s:iterator>
+							
+							</div>						
 						</div>
 						<!-- /Content -->
 						
 						<!-- Sidebar -->
 						<aside id="sidebar" class="sidebar grid_4">
-							
-							<!-- Search Widget -->
-							<div class="search-widget widget widget__sidebar">
-								<div class="widget-content">
-									<form action="#" class="search-form clearfix">
-										<input type="text" name="search-t-i" id="search-t-i" placeholder="Search..."><input type="submit" value="Search">
-									</form>
-								</div>
-							</div>
-							<!-- /Search Widget -->
-							
+
 							<!-- 相关书评 -->
 							<div class="popular-posts widget widget__sidebar">
 								<h3 class="widget-title">相关书评</h3>
 								<div class="widget-content">
 									<ul class="posts-list unstyled clearfix">
+										<s:iterator value="comm" >
 										<li>
-											<figure class="featured-thumb">
-												<a href="#"><img src="images/samples/img70x70.jpg" alt="" width="70" height="70"></a>
-											</figure>
-											<h4><a href="#">书评名</a></h4>
-											<p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
-										</li>
-										<li>
-											<figure class="featured-thumb">
-												<a href="#"><img src="images/samples/img70x70.jpg" alt="" width="70" height="70"></a>
-											</figure>
-											<h4><a href="#">Where are all the space shuttles now?</a></h4>
-											<p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
-										</li>
-										<li>
-											<figure class="featured-thumb">
-												<a href="#"><img src="images/samples/img70x70.jpg" alt="" width="70" height="70"></a>
-											</figure>
-											<h4><a href="#">Should you ever skip giving a tip?</a></h4>
-											<p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
-										</li>
-										<li>
-											<figure class="featured-thumb">
-												<a href="#"><img src="images/samples/img70x70.jpg" alt="" width="70" height="70"></a>
-											</figure>
-											<h4><a href="#">Bulgaria claims to find Europe's 'oldest town'</a></h4>
-											<p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
-										</li>										
+											<header class="post-header">
+												<p class="post-meta">
+												<span class="post-meta-cats"><i class="icon-tag"></i><s:property value="date"/></span>
+												<span class="post-meta-author"><i class="icon-user"></i><s:property value="user.getU_name()"/>/<s:property value="user.getF_id()"/></span>
+												</p>
+											</header>
+											<div class="post-excerpt">
+												<p><s:property value="comments"/></p>
+											</div>											
+										</li>	
+										</s:iterator>																			
 									</ul>
+								</div>
+								
+								<div class="comments-form-wrapper clearfix">
+									<%if(u!=null) { %>
+									<h2>我来评论</h2>
+									
+									<form action="#" id="comment-form" class="comment-form">
+										<div class="field">	
+											<input name="" value="">										
+											<textarea name="comment-message" id="comment-message" cols="20" rows="10"></textarea>
+										</div>
+										<input type="submit" value="评论">
+									</form>
+									<%}else{ %>
+										<h2>请登录后发表评价</h2>
+									<%} %>
 								</div>
 							</div>
 							<!--  -->

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<constant name="struts.enable.DynamicMethodInvocation" value="true" /> 
+<constant name="struts.multipart.saveDir" value="/announceImages"/>
+<constant name="struts.i18n.encoding" value="UTF-8"/>
+ <package name="default" namespace="/" extends="struts-default">
+	<action name="UserLogin" class = "action.UserLogin">
+		<result name="loginfail">/index.jsp</result>
+		<result name="loginok" >/index.jsp</result>
+	</action>
+	<action name="UserLib" class = "action.UserLib">
+	     <result name="toshow">/myself.jsp</result>
+    </action>
+    <action name="UserSearch" class = "action.UserSearch" method="showInformation">
+	     <result name="result">/booklist.jsp</result>
+    </action>
+    <action name="BookManage" class="action.BookManage">
+    	<result name="showBook">/houtai_book.jsp</result>
+    	<result name="addBook" type="redirect">/BookManage!showBook</result>
+    	<result name="wrong">/houtai.jsp</result>
+    	<result name="test">/houtai.jsp</result>
+		<result name="deleteBook" type="redirect">/BookManage!showBook</result>
+		<result name="updateBook" type="redirect">/BookManage!showBook</result>
+		<result name="search" >/houtai_book.jsp</result>
+    </action>
+    <action name="UserAction" class="action.UserAction">
+    	<result name="showReader">/houtai_reader.jsp</result>
+    	<result name="addReader" type="redirect">/UserAction!showReader</result> 
+    	<result name="delete" type="redirect">/UserAction!showReader</result>	
+    	<result name="search" >/houtai_reader.jsp</result>
+    	<result name="renew"  type="chain" >UserLib</result>
+        <result name="addLabel" type="chain" >UserLib</result>
+        <result name="deleteLabel" type="chain" >UserLib</result>
+    </action>
+    <action name="AnnounceAction" class="action.AnnounceAction">
+    	<result name="show">/houtai_announce.jsp</result>
+    	<result name="addAnn" type="redirect">/AnnounceAction!showAllAnn</result>
+    	<result name="deleteAnn" type="redirect">/AnnounceAction!showAllAnn</result>
+    	<result name="deleteSelectAnn" type="redirect">/AnnounceAction!showAllAnn</result>
+    	<result name="searchAnn">/houtai_announce.jsp</result>
+    </action>
+    <action name="FenyeAction" class="action.FenyeAction">
+    	<result name="success" type="redirect">/AnnounceAction!showAllAnn</result>
+    </action>
+    <action name="ChartAction" class = "action.ChartAction">
+	     <result name="result">/chart_columnar.jsp</result>
+    </action>
+    <action name="ShowBook" class="action.ShowBook">
+    	<result name="success">/showBook.jsp</result>
+    </action>
+    <action name="QuitAction" class="action.QuitAction">
+    	<result name="success">/index.jsp</result>
+    	<result name="fail">/index.jsp</result>
+    </action>
+    <action name="AdminLogin" class="action.AdminLogin">
+    	<result name="loginsuccess" type="redirect">/ChartAction!test</result>
+    	<result name="loginfail">/admin.jsp</result>
+    </action>
+</package>
+</struts>

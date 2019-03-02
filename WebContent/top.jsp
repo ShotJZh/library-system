@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="entity.*"%>
 <header id="header" class="header">
 				
 	<!-- Top Header -->
@@ -7,8 +7,8 @@
 		<div class="container clearfix">
 			<div class="grid_12">
 				<!-- Top Menu -->
-				<form style="float:left">
-					<input type="search" placeholder="Search">
+				<form style="float:left" action="UserSearch!search" method="post">
+					<input type="search" placeholder="Search" name="key">
 					<input type="submit" value="搜索">
 				</form>
 				<div style="float:right">
@@ -27,7 +27,7 @@
 				<!-- BEGIN LOGO -->
 				<div id="logo">
 					<!-- Image based Logo -->
-					<a href="index.html"><img src="images/logo.png" alt="Emotion" width="145" height="67" /></a>
+					<a href="index.jsp"><img src="images/logo.png" alt="Emotion" width="145" height="67" /></a>
 					
 					<!-- Text based Logo
 					<h1><a href="index.html">Emotion</a></h1>
@@ -43,26 +43,16 @@
 						<li class="current-menu-item">
 							<a href="index.jsp">首页<span><i>|</i></span></a>
 						</li>
-						
+						<%
+						if((u!=null)&&(u.getU_type()==1)){ %>
 						<li>
-							<a href="#">最近活动 <span><i>|</i> </span></a>
-							<ul>
-								<li><a>活动预告</a></li>
-								<li><a>活动展示</a></li>
-							</ul>							
+							<a href="UserLib!showInformation">我的图书馆 <span><i>|</i> </span></a>
 						</li>
-						
+						<%}else if(u!=null){ %>
 						<li>
-							<a href="#">最新公告 <span><i>|</i> </span></a>
+							<a href="teacher-self.jsp">我的图书馆 <span><i>|</i> </span></a>
 						</li>
-						
-						<li>
-							<a href="#">馆藏资源 <span><i>|</i> </span></a>											
-						</li>
-						<li>
-							<a href="myself.jsp">我的图书馆 <span><i>|</i> </span></a>
-						</li>
-						
+						<%} %>
 					</ul>
 				</nav>
 				<!-- END NAVIGATION -->

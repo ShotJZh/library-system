@@ -24,8 +24,6 @@
 ================================================== */
 
 /* Google Web Fonts */
-@import url(http://fonts.useso.com/css?family=Oswald);
-@import url(http://fonts.useso.com/css?family=Anton); /* Delete this import if you don't use Text Based Logo */
 
 html, body {height:100%;}
 

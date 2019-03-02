@@ -377,7 +377,7 @@ nav.primary {
 }
 	.latest-posts-holder .featured-thumb {
 		width: 220px;
-		height: 156px;
+		height: 210px;
 		margin-bottom: 0;
 	}
 	.post-header h3 {
@@ -1071,8 +1071,7 @@ nav.primary {
 }
 .self{
 	clear:both;
-	height:400px;
-	text-align:center;
+	padding:20px;
 	margin:20px;
 }
 .checkbox {          
@@ -1877,4 +1876,11 @@ nav.primary {
 
 	}
 
+
+
 /*/#Misc */
+
+.title{
+	margin:10px;
+	
+}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 7]>                  <html class="ie7 no-js" lang="en">     <![endif]-->
 <!--[if lte IE 8]>              <html class="ie8 no-js" lang="en">     <![endif]-->
@@ -69,44 +70,72 @@
 				<!-- BEGIN CONTENT WRAPPER -->
 				<div id="content-wrapper" class="content-wrapper">
 					
-					<div class="container">
-						<h2 style="margin:20px;">约有<strong style="color:#d47e74">*</strong>本符合“<strong style="color:#d47e74">关键词</strong>”及其筛选结果</h2>
+					<div class="container clearfix">
+					<div id="content">
+						<h2 style="margin:20px;">有<strong style="color:#d47e74"><s:property value="list.size()"/></strong>本符合“<strong style="color:#d47e74"><s:property value="key"/></strong>”及其筛选结果</h2>
+						<s:iterator value="list" >
 						<div class="booklists">
 							<div class="book" style="overflow:hidden;">
-								<img src="" class="book-img"/>
+								
 								<div class="book-content">
-									<h3 style="font-size:18px;">书名</h3>
-									<p>作者  著/出版社</p>
-									<p>馆藏量</p>									
-									<div class="book-info">内容简介</div>
-									<div style="float:right">
-									<p style="text-align:right;">
-									索书号&nbsp;&nbsp;
-									<span onclick="$use()" id="stateBtn" style="cursor: pointer">展开</span>
-									<p>
-									<div id="book-locate" >
-										<table>
-											<thead>
-												<th width="20%">索书号</th>
-												<th width="20%">馆藏状态</th>
-												<th width="20%">流通状态</th>
-												<th width="40%">馆藏地点</th>
-											</thead>
-											<tr>
-												<td>索书号</td>
-												<td>馆藏状态</td>
-												<td>流通状态</td>
-												<td>馆藏地点</td>
-											</tr>
-										</table>
-									</div>	
-									</div>							
+								<table >
+										<tr>
+											<td rowspan="6"><img src="<s:property value="b_pic"/>" class="book-img"/></td>
+											<td colspan="2"><h3 style="font-size:18px;"><a href="ShowBook!execute?b_id=${b_id}"><s:property value="b_name"/></a></h3></td>
+										</tr>
+										<tr>
+											<td><p style="font-size:14px;">作者: </p></td>
+											<td><p style="font-size:13px;"><s:property value="b_author"/>著</p></td>
+										</tr>
+										<tr>
+											<td><p style="font-size:14px;">出版社:</p></td>
+											<td><p style="font-size:13px;"><s:property value="b_press"/></p></td>
+										</tr>
+										<tr>
+											<td><p style="font-size:14px;">馆藏量:</p></td>
+											<td><p style="font-size:13px;"><s:property value="b_in"/></p></td>
+										</tr>
+										<tr>
+											<td><p style="font-size:14px;">借出数:</p></td>
+											<td><p style="font-size:13px;"><s:property value="b_out"/></p></td>
+										</tr>
+										<tr>
+											<td><p style="font-size:14px;">馆藏地点:</p></td>
+											<td><p style="font-size:13px;"><s:property value="b_location"/></p></td>
+										</tr>
+									</table>
+			
 								</div>
 							</div>
 						</div>
-					</div>										
-																		
+						</s:iterator>
+						<br>
+						<h2>相似推荐</h2>							
+							<div class="showBook">
+							<s:iterator value="similarList" >
+								<div class="bookList">
+								<table>
+									<tr><td>
+									<a href="ShowBook!execute?b_id=${b_id}"><img src="<s:property value="b_pic"/>" class="book-img"></a>
+									</td></tr>
+									<tr><td>
+									<h4>书名 :<s:property value="b_name"/></h3>
+									</td></tr>
+									<tr><td>
+									<h4>作者:<s:property value="b_author"/></h3>
+									</td></tr>
+								</table>									
+								</div>	
+							</s:iterator>							
+							</div>
+						</div>
+						</div>
+						
 				</div>
+				</div>						
+							</div>
+					</div>																												
+				</div>				
 			</div>
 		</div>
 		</div>

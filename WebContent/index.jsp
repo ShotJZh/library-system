@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="dao.*,java.util.*,entity.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 7]>                  <html class="ie7 no-js" lang="en">     <![endif]-->
 <!--[if lte IE 8]>              <html class="ie8 no-js" lang="en">     <![endif]-->
@@ -9,7 +9,7 @@
 	<!-- Basic Page Needs
 	================================================== -->
 	<meta charset="utf-8">
-	<title>懂你图书馆</title>
+	<title>know you图书馆</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,9 +17,7 @@
 	<!-- Mobile Specific Metas
 	================================================== -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	
-	
-	
+		
 	<!-- CSS
 	================================================== -->
 	<!-- Normalize default styles -->
@@ -60,7 +58,30 @@
 	
 </head>
 <body>
-	
+	<%
+	List<Book> newList = new  ArrayList<Book>();
+	List<News> newsList = new  ArrayList<News>();
+	List<Book> popularList = new  ArrayList<Book>();
+	List<Book> personalList = new ArrayList<Book>();
+	List<TeacherRecommend> tList= new ArrayList<TeacherRecommend>();
+	List<BookComments> commList=new ArrayList<BookComments>();	
+	BookDAO dao=new BookDAO();
+	BookCommentsDAO bc_dao=new BookCommentsDAO();
+	newList=dao.getNewBook();
+	popularList=dao.getPopularBook();
+	for (int i=0;i<popularList.size();i++){
+		System.out.println(popularList.get(i).getB_pic());
+	}
+	for(int i=0;i<4;i++){
+		BookComments bc=bc_dao.getBookComments(popularList.get(i)).get(0);
+		commList.add(bc);
+	}
+	User user=(User)session.getAttribute("user");
+	//if(user!=null)
+		newsList=new NewsDAO().getNews(user);
+		for(int i=0;i<newsList.size();i++)
+			System.out.println(newsList.get(i).getN_pic());
+	%>
 	<!-- BEGIN WRAPPER -->
 	<div id="wrapper">
 			
@@ -77,31 +98,9 @@
 									<ul>
 										<!-- THE FIRST SLIDE -->
 										<li data-transition="fade" data-slotamount="10" data-masterspeed="300" data-slideindex="back">
-											<!-- THE MAIN IMAGE IN THE SLIDE -->
-											<img src="images/samples/slide3.jpg">
-		
-											<!-- THE CAPTIONS OF THE FIRST SLIDE -->
-											<div class="tp-caption sfl original"
-												data-x="100"
-												data-y="146"
-												data-speed="300"
-												data-start="600"
-												data-captionhidden="on"
-												data-endeasing="easeOutExpo"
-												data-easing="easeOutExpo">
-												Create Your Own
-											</div>
 											
-											<div class="tp-caption sfr original_high"
-												data-x="142"
-												data-y="178"
-												data-speed="300"
-												data-start="800"
-												data-captionhidden="on"
-												data-endeasing="easeOutExpo"
-												data-easing="easeOutExpo">
-												Personality!
-											</div>
+											<!-- THE MAIN IMAGE IN THE SLIDE -->
+											<img src="images/slide1.jpg">
 											
 										</li>
 										
@@ -110,89 +109,14 @@
 										<li data-transition="fade" data-slotamount="10" data-masterspeed="300" data-slideindex="back">
 										
 											<!-- THE MAIN IMAGE IN THE SLIDE -->
-											<img src="images/slide-light.jpg">
-		
-											<!-- THE CAPTIONS OF THE SECOND SLIDE -->
-											<div class="tp-caption sfl original"
-												data-x="100"
-												data-y="146"
-												data-speed="300"
-												data-start="600"
-												data-captionhidden="on"
-												data-endeasing="easeOutExpo"
-												data-easing="easeOutExpo">
-												Our team is
-											</div>
-											
-											<div class="tp-caption sfr original_high"
-												data-x="142"
-												data-y="178"
-												data-speed="300"
-												data-start="800"
-												data-captionhidden="on"
-												data-endeasing="easeOutExpo"
-												data-easing="easeOutExpo">
-												Professional
-											</div>
-
-										<div class="caption randomrotate"
-											 data-x="680"
-											 data-y="35"
-											 data-speed="600"
-											 data-start="1200"
-											 data-easing="easeOutExpo"  ><img src="images/samples/img140x140.jpg" alt="Image 3"></div>
-
-										<div class="caption randomrotate"
-											 data-x="530"
-											 data-y="35"
-											 data-speed="600"
-											 data-start="1300"
-											 data-easing="easeOutExpo"  ><img src="images/samples/img140x140.jpg" alt="Image 4"></div>
-
-										<div class="caption randomrotate"
-											 data-x="680"
-											 data-y="185"
-											 data-speed="300"
-											 data-start="1400"
-											 data-easing="easeOutExpo"  ><img src="images/samples/img140x140.jpg" alt="Image 5"></div>
-
-										<div class="caption randomrotate"
-											 data-x="530"
-											 data-y="185"
-											 data-speed="600"
-											 data-start="1500"
-											 data-easing="easeOutExpo"  ><img src="images/samples/img140x140.jpg" alt="Image 6"></div>
-										
+											<img src="images/slide2.jpg">													
 											
 										</li>
 										
 										<!-- THE THIRD SLIDE -->
 										<li data-transition="fade" data-slotamount="10" data-masterspeed="300" data-slideindex="back">
 											<!-- THE MAIN IMAGE IN THE SLIDE -->
-											<img src="images/samples/slide2.jpg">
-		
-											<!-- THE CAPTIONS OF THE THIRD SLIDE -->
-											<div class="tp-caption sft original"
-												data-x="100"
-												data-y="146"
-												data-speed="300"
-												data-start="600"
-												data-captionhidden="on"
-												data-endeasing="easeOutExpo"
-												data-easing="easeOutExpo">
-												The Best Solution
-											</div>
-											
-											<div class="tp-caption sfb original_high"
-												data-x="142"
-												data-y="178"
-												data-speed="300"
-												data-start="800"
-												data-captionhidden="on"
-												data-endeasing="easeOutExpo"
-												data-easing="easeOutExpo">
-												You can Find!
-											</div>
+											<img src="images/slide3.jpg">													
 											
 										</li>
 										
@@ -201,42 +125,10 @@
 										<li data-transition="fade" data-slotamount="10" data-masterspeed="300" data-slideindex="back">
 										
 												<!-- THE MAIN IMAGE IN THE SLIDE -->
-												<img src="images/slide-black.jpg">
-
-												<div class="caption fade fullscreenvideo" data-autoplay="false" data-x="0" data-y="0" data-speed="500" data-start="10" data-easing="easeOutBack">111</div>
+												<img src="images/slide4.jpg">												
 
 										</li>
-										
-										<!-- THE FIFTH SLIDE -->
-										<li data-transition="fade" data-slotamount="10" data-masterspeed="300" data-slideindex="back">
-											<!-- THE MAIN IMAGE IN THE SLIDE -->
-											<img src="images/samples/slide1.jpg">
-		
-											<!-- THE CAPTIONS OF THE FIFTH SLIDE -->
-											<div class="tp-caption sft original"
-												data-x="100"
-												data-y="146"
-												data-speed="300"
-												data-start="600"
-												data-captionhidden="on"
-												data-endeasing="easeOutExpo"
-												data-easing="easeOutExpo">
-												We always think
-											</div>
-											
-											<div class="tp-caption sfb original_high"
-												data-x="142"
-												data-y="178"
-												data-speed="300"
-												data-start="800"
-												data-captionhidden="on"
-												data-endeasing="easeOutExpo"
-												data-easing="easeOutExpo">
-												About Customers
-											</div>
-											
-										</li>
-										
+																				
 									</ul>
 								</div>
 							</div>
@@ -259,113 +151,85 @@
 										<ul>
 											<li><a href="#tab1">新书速递</a></li>
 											<li><a href="#tab2">热门图书</a></li>
-											<li><a href="#tab3">老师荐书</a></li>
+											<%if(user!=null) {
+											personalList=new UserDAO().labelRecommend(user);%>											
+											<li><a href="#tab3">个性推荐</a></li>
+											<%} %>
+											<%if((user!=null)&&(user.getU_type()==1))
+											{
+											tList=new UserDAO().getRecommend(user);
+											%>									
+											<li><a href="#tab4">老师荐书</a></li>
+											<%}%>
+										
 										</ul>
 									</div>
 									<div class="tab-wrapper">
 										<div id="tab1" class="tab">
 											<!-- Latest Posts Loop -->
 											<ul class="post-loop unstyled clearfix">
+											<%for(int i=0;i<4;i++){ %>
 												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
+													<img src="<%=newList.get(i).getB_pic() %>" alt="" class="post-img" style="width:220px; height:210px">
 													<div class="post-caption">
-														<span class="post-cats"><a href="#">News</a> / <a href="#">Design</a></span>
-														<h4><a href="#">Vivamus  ullamcorper,  nunc sed  imperdiet pretium</a></h4>
+														<span class="post-cats">by  <%=newList.get(i).getB_author() %></span>
+														<h4><a href="ShowBook!execute?b_id=<%=newList.get(i).getB_id() %>"><%=newList.get(i).getB_name() %></a>
 													</div>
 												</li>
-												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
-													<div class="post-caption">
-														<span class="post-cats"><a href="#">Illustration</a></span>
-														<h4><a href="#">Pellentesque tristique lacinia adipiscing</a></h4>
-													</div>
-												</li>
-												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
-													<div class="post-caption">
-														<span class="post-cats"><a href="#">Graphic</a> / <a href="#">Design</a></span>
-														<h4><a href="#">Nulla vitae dui vel dolor laoreet</a></h4>
-													</div>
-												</li>
-												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
-													<div class="post-caption">
-														<span class="post-cats"><a href="#">News</a> / <a href="#">Logo</a></span>
-														<h4><a href="#">Suspendisse odio est, lacinia nec adipiscing</a></h4>
-													</div>
-												</li>
+												<%} %>
 											</ul>
 											<!-- /Latest Posts Loop -->
 										</div>
 										<div id="tab2" class="tab">
 											<!-- Popular Posts Loop -->
 											<ul class="post-loop unstyled clearfix">
+											<%for(int i=0;i<4;i++){ %>
 												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
+													<img src="<%=popularList.get(i).getB_pic() %>" alt="" class="post-img" style="width:220px; height:210px">
 													<div class="post-caption">
-														<span class="post-cats"><a href="#">Illustration</a></span>
-														<h4><a href="#">Pellentesque tristique lacinia adipiscing</a></h4>
+														<span class="post-cats">by  <%=popularList.get(i).getB_author() %></span>
+														<h4><a href="ShowBook!execute?b_id=<%=popularList.get(i).getB_id() %>"><%=popularList.get(i).getB_name() %></a></h4>
 													</div>
 												</li>
-												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
-													<div class="post-caption">
-														<span class="post-cats"><a href="#">News</a> / <a href="#">Design</a></span>
-														<h4><a href="#">Vivamus  ullamcorper,  nunc sed  imperdiet pretium</a></h4>
-													</div>
-												</li>
-												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
-													<div class="post-caption">
-														<span class="post-cats"><a href="#">News</a> / <a href="#">Logo</a></span>
-														<h4><a href="#">Suspendisse odio est, lacinia nec adipiscing</a></h4>
-													</div>
-												</li>
-												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
-													<div class="post-caption">
-														<span class="post-cats"><a href="#">Graphic</a> / <a href="#">Design</a></span>
-														<h4><a href="#">Nulla vitae dui vel dolor laoreet</a></h4>
-													</div>
-												</li>
-												
+												<%} %>				
 											</ul>
 											<!-- /Popular Posts Loop -->
 										</div>
+										<%if(!personalList.isEmpty()){ %>
 										<div id="tab3" class="tab">
+											<!-- Popular Posts Loop -->
+											<ul class="post-loop unstyled clearfix">
+											<%for(int i=0;i<personalList.size()&&i<4;i++){ %>
+												<li>
+													<img src="<%=personalList.get(i).getB_pic() %>" alt="" class="post-img" style="width:220px; height:210px">
+													<div class="post-caption">
+														<span class="post-cats">by  <%=personalList.get(i).getB_author() %></span>
+														<h4><a href="ShowBook!execute?b_id=<%=personalList.get(i).getB_id() %>"><%=personalList.get(i).getB_name() %></a></h4>
+													</div>
+												</li>
+												<%} %>				
+											</ul>
+											<!-- /Popular Posts Loop -->
+										</div>
+										<%} %>
+										<%if(!tList.isEmpty()){ %>
+										<div id="tab4" class="tab">
 											<!-- Featured Posts Loop -->
 											<ul class="post-loop unstyled clearfix">
+											<%for(int i=0;i<4;i++) {%>
 												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
+													<img src="<%=tList.get(i).getrBook().getB_pic()%>" alt="" class="post-img" style="width:220px; height:210px">
 													<div class="post-caption">
-														<span class="post-cats"><a href="#">News</a> / <a href="#">Logo</a></span>
-														<h4><a href="#">Suspendisse odio est, lacinia nec adipiscing</a></h4>
+														<span class="post-cats">by  <%=tList.get(i).getrBook().getB_author() %></span>
+														<h4><a href="ShowBook!execute?b_id=<%=tList.get(i).getrBook().getB_id() %>"><%=tList.get(i).getrBook().getB_name() %></a></h4>
+														<h3 align="right">推荐老师:<%=tList.get(i).getTeacher().getU_name() %></h3>
 													</div>
 												</li>
-												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
-													<div class="post-caption">
-														<span class="post-cats"><a href="#">News</a> / <a href="#">Design</a></span>
-														<h4><a href="#">Vivamus  ullamcorper,  nunc sed  imperdiet pretium</a></h4>
-													</div>
-												</li>
-												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
-													<div class="post-caption">
-														<span class="post-cats"><a href="#">Graphic</a> / <a href="#">Design</a></span>
-														<h4><a href="#">Nulla vitae dui vel dolor laoreet</a></h4>
-													</div>
-												</li>
-												<li>
-													<img src="images/samples/img220x210.jpg" alt="" class="post-img" width="220" height="210">
-													<div class="post-caption">
-														<span class="post-cats"><a href="#">Illustration</a></span>
-														<h4><a href="#">Pellentesque tristique lacinia adipiscing</a></h4>
-													</div>
-												</li>
+												<%} %>												
 											</ul>
 											<!-- /Featured Posts Loop -->
 										</div>
+										<%} %>
 									</div>
 								</div>
 								<!-- END TABBED CONTENT -->
@@ -379,85 +243,29 @@
 							<!-- BEGIN CONTENT -->
 							<section id="content" class="grid_8">
 								<h2>热门书评</h2>
-								
+								<br/>
 								<div class="latest-posts-holder">
+								<%for(int i=0;i<4;i++) {%>
 									<article class="post clearfix">
 										<figure class="featured-thumb">
-											<a href="#"><img src="images/samples/img220x156.jpg" alt=""></a>
+											<a href="ShowBook!execute?b_id=<%=commList.get(i).getBook().getB_id() %>"><img src="<%=commList.get(i).getBook().getB_pic() %>" style="width:220px; height:210px"/></a>
 										</figure>
 										<div class="post-body">
 											<header class="post-header">
-												<h3><a href="#">Should you ever skip giving a tip?</a></h3>
+												<h3><a href="ShowBook!execute?b_id=<%=commList.get(i).getBook().getB_id() %>"><%=commList.get(i).getBook().getB_name() %></a></h3>
 												<p class="post-meta">
-													<span class="post-meta-cats"><i class="icon-tag"></i><a href="#">News</a> / <a href="#">Design</a></span>
-													<span class="post-meta-author"><a href="#"><i class="icon-user"></i>Dan Fisher</a></span>
-													<span class="post-meta-comments"><a href="#"><i class="icon-comment"></i>16</a></span>
+													<span class="post-meta-cats"><i class="icon-tag"></i><%=commList.get(i).getDate() %></span>
+													<span class="post-meta-author"><i class="icon-user"></i><%=commList.get(i).getUser().getU_name() %> / <%=commList.get(i).getUser().getF_id() %></span>
+													<span class="post-meta-comments"><i class="icon-comment"></i><%=bc_dao.getBookComments(commList.get(i).getBook()).size()%></span>
 												</p>
 											</header>
 											<div class="post-excerpt">
-												<p>Quisque sed metus at justo vestibulum congue at et arcu. Maecen pellentesque lobortis ante. Vestibulum quam cursus eget augue purus, ac dictum ante.</p>
-												<a href="#" class="btn">Read More</a>
+												<p><%=commList.get(i).getComments() %></p>
+												<a href="ShowBook!execute?b_id=<%=commList.get(i).getBook().getB_id() %>" class="btn">Read More</a>
 											</div>
 										</div>
 									</article>
-									<article class="post clearfix">
-										<figure class="featured-thumb">
-											<a href="#"><img src="images/samples/img220x156.jpg" alt=""></a>
-										</figure>
-										<div class="post-body">
-											<header class="post-header">
-												<h3><a href="#">Bulgaria claims to find Europe's 'oldest town'</a></h3>
-												<p class="post-meta">
-													<span class="post-meta-cats"><i class="icon-tag"></i><a href="#">News</a> / <a href="#">Design</a></span>
-													<span class="post-meta-author"><a href="#"><i class="icon-user"></i>Dan Fisher</a></span>
-													<span class="post-meta-comments"><a href="#"><i class="icon-comment"></i>16</a></span>
-												</p>
-											</header>
-											<div class="post-excerpt">
-												<p>Quisque sed metus at justo vestibulum congue at et arcu. Maecen pellentesque lobortis ante. Vestibulum quam cursus eget augue purus, ac dictum ante.</p>
-												<a href="#" class="btn">Read More</a>
-											</div>
-										</div>
-									</article>
-									<article class="post clearfix">
-										<figure class="featured-thumb">
-											<a href="#"><img src="images/samples/img220x156.jpg" alt=""></a>
-										</figure>
-										<div class="post-body">
-											<header class="post-header">
-												<h3><a href="#">Where are all the space shuttles now?</a></h3>
-												<p class="post-meta">
-													<span class="post-meta-cats"><i class="icon-tag"></i><a href="#">News</a> / <a href="#">Design</a></span>
-													<span class="post-meta-author"><a href="#"><i class="icon-user"></i>Dan Fisher</a></span>
-													<span class="post-meta-comments"><a href="#"><i class="icon-comment"></i>16</a></span>
-												</p>
-											</header>
-											<div class="post-excerpt">
-												<p>Quisque sed metus at justo vestibulum congue at et arcu. Maecen pellentesque lobortis ante. Vestibulum quam cursus eget augue purus, ac dictum ante.</p>
-												<a href="#" class="btn">Read More</a>
-											</div>
-										</div>
-									</article>
-									<article class="post clearfix">
-										<figure class="featured-thumb">
-											<a href="#"><img src="images/samples/img220x156.jpg" alt=""></a>
-										</figure>
-										<div class="post-body">
-											<header class="post-header">
-												<h3><a href="#">Should you ever skip giving a tip?</a></h3>
-												<p class="post-meta">
-													<span class="post-meta-cats"><i class="icon-tag"></i><a href="#">News</a> / <a href="#">Design</a></span>
-													<span class="post-meta-author"><a href="#"><i class="icon-user"></i>Dan Fisher</a></span>
-													<span class="post-meta-comments"><a href="#"><i class="icon-comment"></i>16</a></span>
-												</p>
-											</header>
-											<div class="post-excerpt">
-												<p>Quisque sed metus at justo vestibulum congue at et arcu. Maecen pellentesque lobortis ante. Vestibulum quam cursus eget augue purus, ac dictum ante.</p>
-												<a href="#" class="btn">Read More</a>
-											</div>
-										</div>
-									</article>
-									<div><a href="#">更多</a></div>
+									<%} %>
 								</div>								
 									
 							</section>
@@ -467,117 +275,26 @@
 							<aside id="sidebar" class="sidebar grid_4">
 								<!-- Popular Posts Widget -->
 								<div class="popular-posts widget widget__sidebar">
-									<h3 class="widget-title">名家故事</h3>
+									<h3 class="widget-title">今日资讯</h3>
 									<div class="widget-content">
 										<ul class="posts-list unstyled clearfix">
+											<%for(int i=0;i<newsList.size();i++){ %>
 											<li>
 												<figure class="featured-thumb">
-													<a href="#"><img src="images/samples/img70x70.jpg" alt="" width="70" height="70"></a>
+													<a href="images/apple-touch-icon-72x72.png"><img src="<%=newsList.get(i).getN_pic() %>" alt="<%=newsList.get(i).getN_pic() %>" width="70" height="70" /></a>
+													
 												</figure>
-												<h4><a href="#">Bulgaria claims to find Europe's 'oldest town'</a></h4>
-												<p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
+												<h4><a href="<%=newsList.get(i).getN_link() %>"><%=newsList.get(i).getN_title() %></a></h4>
+												<p class="post-meta"> <%=newsList.get(i).getN_date()%> </p>
 											</li>
-											<li>
-												<figure class="featured-thumb">
-													<a href="#"><img src="images/samples/img70x70.jpg" alt="" width="70" height="70"></a>
-												</figure>
-												<h4><a href="#">Where are all the space shuttles now?</a></h4>
-												<p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
-											</li>
-											<li>
-												<figure class="featured-thumb">
-													<a href="#"><img src="images/samples/img70x70.jpg" alt="" width="70" height="70"></a>
-												</figure>
-												<h4><a href="#">Should you ever skip giving a tip?</a></h4>
-												<p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
-											</li>
-											<li>
-												<figure class="featured-thumb">
-													<a href="#"><img src="images/samples/img70x70.jpg" alt="" width="70" height="70"></a>
-												</figure>
-												<h4><a href="#">Bulgaria claims to find Europe's 'oldest town'</a></h4>
-												<p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
-											</li>
-											<li>
-												<figure class="featured-thumb">
-													<a href="#"><img src="images/samples/img70x70.jpg" alt="" width="70" height="70"></a>
-												</figure>
-												<h4><a href="#">New 'Star Wars' hints</a></h4>
-												<p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
-											</li>
+											<%}%> 				
 										</ul>
 									</div>
 								</div>
 								<!-- /Popular Posts Widget -->
-								
-								<!-- Ad Spots Widget -->
-								<div class="ad-spots widget widget__sidebar">
-									<h3 class="widget-title">热门标签</h3>
-									<div class="widget-content">
-										<ul class="ad-holder unstyled clearfix">
-											<li><a href="#"><img src="images/samples/banner125x125.jpg" alt="" width="250" height="125"></a></li>
-											<!--
-											<li><a href="#"><img src="images/samples/banner125x125.jpg" alt="" width="125" height="125"></a></li>
-											-->
-										</ul>
-									</div>
-								</div>
-								<!-- /Ad Spots Widget -->
 							</aside>
 							<!-- END SIDEBAR -->
-						</div>											
-						
-						<div id="middle_content">
-							
-							<div id="notice">
-								<h2 style="padding-right:30px;">
-									通知公告						
-								</h2>
-								<ul class="notice_ul">
-									<li>
-										<span class="notice_time">2018-04-01</span>
-										<span class="notice_content"><a href="#">通知一</a></span>
-									</li>
-									<li>
-										<span class="notice_time">2018-04-01</span>
-										<span class="notice_content"><a href="#">通知一</a></span>
-									</li>
-									<li>
-										<span class="notice_time">2018-04-01</span>
-										<span class="notice_content"><a href="#">通知一</a></span>
-									</li>
-									<li>
-										<span class="notice_time">2018-04-01</span>
-										<span class="notice_content"><a href="#">通知一</a></span>
-									</li>
-									<li>
-										<span class="notice_time">2018-04-01</span>
-										<span class="notice_content"><a href="#">通知一</a></span>
-									</li>
-									<li>
-										<span class="notice_time">2018-04-01</span>
-										<span class="notice_content"><a href="#">通知一</a></span>
-									</li>
-									<li>
-										<span class="notice_time">2018-04-01</span>
-										<span class="notice_content"><a href="#">通知一</a></span>
-									</li>
-									<li>
-										<a href="#"><i style="float:right">更多>></i></a>
-									</li>
-								</ul>
-							</div>
-							<div id="resource">
-								<h2>资源导航</h2>
-								<ul class="resource_ul">
-									<li><a href="#">数据库导航</a></li>
-									<li><a href="#"></a></li>
-									<li><a href="#"></a></li>
-									<li><a href="#"></a></li>
-								</ul>
-							</div>
-						</div>
-						
+						</div>															
 					</div>
 					
 				</div>
@@ -597,12 +314,15 @@
 							<div class="grid_5">
 								<!-- Text Widget -->
 								<div class="text-widget widget widget__footer">
-									<h3 class="widget-title">About This Theme</h3>
+									<h3 class="widget-title">友情链接</h3>
 									<div class="widget-content">
-										<h5>Donec tincidunt, mi non ultrices varius, diam felis</h5>
-										<p>Elementum eros, at congue nisl massa ut metus. Vivamus accumsan malesuada orci, vel euismod velit aliquet id.</p>
-										
-										<p>Sed aliquet tempus pellentesque. Curabitur varius suscipit orci, quis cursus quam varius vel.Vivamus nec tortor tellus.</p>
+										<ul>
+											<li><a href="">中国国家图书馆</a></li>
+											<li><a href="">国内国外图书馆</a></li>
+											<li><a href="">中文核心期刊目录</a></li>
+											<li><a href="">中国图书馆分类法</a></li>
+											<li><a href="">湖北省数字图书馆</a></li>
+										</ul>
 									</div>
 								</div>
 								<!-- /Text Widget -->
@@ -610,9 +330,14 @@
 							<div class="grid_3">
 								<!-- Twitter Widget -->
 								<div class="twitter-widget widget widget__footer">
-									<h3 class="widget-title">Twitter</h3>
+									<h3 class="widget-title">服务指南</h3>
 									<div class="widget-content">
-										111
+										<ul>
+											<li><a href="">网络服务</a></li>
+											<li><a href="">信息系统</a></li>
+											<li><a href="">办公系统</a></li>
+											<li><a href="">联系我们</a></li>
+										</ul>
 									</div>
 								</div>
 								<!-- /Twitter Widget -->
@@ -620,10 +345,9 @@
 							<div class="grid_4">
 								<!-- Flickr Widget -->
 								<div class="flickr-widget widget widget__footer">
-									<h3 class="widget-title">Flickr Feed</h3>
+									
 									<div class="widget-content">
-										<!-- Flickr images will appear here -->
-										11
+										<img src="images/logo.png">
 									</div>
 								</div>
 								<!-- /Flickr Widget -->
@@ -638,11 +362,8 @@
 						<div class="container clearfix">
 							<div class="grid_12">
 								<div class="clearfix">
-									<div class="copyright-primary">
-										&copy;  2013 Emotion <span class="separator">|</span> Responsive HTML Template
-									</div>
 									<div class="copyright-secondary">
-										More Templates <a href="" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+										&copy;  中南财经政法大学 
 									</div>
 								</div>
 							</div>

@@ -272,34 +272,76 @@
 												</div>
 											</div>
 											<div id="content7" style="display:none">
-												<form action="" method="post">
+												<div class="search-widget widget widget__sidebar">
+													<div class="widget-content">
+														<form action="#" class="search-form clearfix" style="margin-left:30px;">
+															<input type="text" name="search-t-i" id="search-t-i" placeholder="要推荐的书...">
+															<input type="submit" value="搜索">
+														</form>
+													</div>
+												</div>
+												<!-- 此区域显示搜索得到的图书 -->
+												<div>
+													<table style="width:60%;text-align:center;margin-left:30px;border:1px #C0C0C0 dashed;">
+														<thead>
+															<th width="60%">书名</th>
+															<th width="40%">作者</th>
+														</thead>
+														<tr>															
+															<td>书名</td>
+															<td>作者</td>														
+														</tr>
+													</table>								
+												</div>
+												<!-- 显示搜索得到的书 -->
+												<form action="" method="post" name="form1">
 												<table style="margin:20px;">
 													<tr>
+														<td align="right">图书编号:</td>
+														<td><h2>显示图书编号</h2> </td>
+													</tr>		
+													<tr>
 														<td align="right">图书名:</td>
-														<td><input type="text" name="" > </td>
+														<td><h2>显示图书名</h2> </td>
 													</tr>
 													<tr>
 														<td align="right">作者:</td>
-														<td><input type="text" name="" ></td>
-													</tr>
-													<tr>
-														<td align="right">馆藏信息:</td>
-														<td><input type="text" name="" ></td>
-													</tr>
+														<td><h2>显示作者</h2> </td>
+													</tr>																							
 													<tr>
 														<td align="right">推荐理由:</td>
-														<td><textarea style="width:400px;height:300px;"></textarea></td>
+														<td><textarea style="width:400px;height:200px;"></textarea></td>
 													</tr>
 													<tr>
-														<td align="right">面向群体:</td>
-														<td>															
-															<input type="checkbox" name="" value="">专业一
-															<input type="checkbox" name="" value="">专业二
-															<input type="checkbox" name="" value="">专业三
-															<br/>
-															<input type="checkbox" name="" value="">专业四
-															<input type="checkbox" name="" value="">专业五
-															<input type="checkbox" name="" value="">专业六
+														<td align="right">面向学院:</td>														
+													    <td height="22" align="left">
+														 	 <select name="aca" id="acaid" style="height:30px;width:150px;" onChange="changeMenu(arr2[document.form1.aca.options[document.form1.acaid.selectedIndex].text],document.form1.majorid);">
+																<option selected value="_all">所有学院</option>
+																<option value="会计学院">会计学院</option>
+																<option value="工程学院">工程学院</option>
+																<option value="金融学院">金融学院</option>
+															 </select>
+													  	</td>
+												   </tr>
+													<!-- 根据所选的学院显示相应的专业  -->
+												   <tr id="major-tr">
+														<td align="right">面向专业:</td>
+														<td>																									
+															<select name="major" id="majorid" style="height:30px;width:150px;">
+																<option selected value="al">所有学院</option>
+																<option value="会计学">会计学</option>
+																<option value="计算机科学与技术">计算机科学与技术</option>
+																<option value="金融学">金融学院</option>
+													     	</select>
+														</td>
+													</tr>
+													<tr>
+														<td align="right">面向年级:</td>
+														<td>																									
+															<input type="checkbox" name="" value="2017">大一
+															<input type="checkbox" name="" value="2016">大二
+															<input type="checkbox" name="" value="2015">大三
+															<input type="checkbox" name="" value="2014">大四
 														</td>
 													</tr>
 													<tr>
